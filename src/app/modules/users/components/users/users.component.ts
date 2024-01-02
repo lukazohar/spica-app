@@ -36,10 +36,13 @@ export class UsersComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator as MatTableDataSourcePaginator;
     this.dataSource.sort = this.sort as MatSort;
+    this.dataSource.filterPredicate = function (record, filter) {
+      return `${record.FirstName.toLowerCase()}${record.LastName.toLowerCase()}`.indexOf(filter) != -1;
+   }
   }
 
   getUsers(): Observable<IUser[]> {
-    return this.usersService.getUsers().pipe(tap(res => console.log(res)));
+    return this.usersService.getUsers();
   }
 
   announceSortChange(sortState: Sort) {
@@ -52,5 +55,10 @@ export class UsersComponent implements OnInit, AfterViewInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

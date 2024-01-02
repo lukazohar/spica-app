@@ -9,6 +9,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { MatTableModule } from '@angular/material/table';
     AppRoutingModule,
     JwtModule.forRoot({ config: { tokenGetter: () => null } }),
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [
     {
