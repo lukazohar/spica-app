@@ -7,7 +7,7 @@ import { NgxEnvModule } from '@ngx-env/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
-import { Token } from '@angular/compiler';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,6 +15,7 @@ import { Token } from '@angular/compiler';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     NgxEnvModule,
     AppRoutingModule,
     JwtModule.forRoot({ config: { tokenGetter: () => null } }),
