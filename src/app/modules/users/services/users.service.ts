@@ -21,7 +21,7 @@ export class UsersService {
     return this.http.get<IUser[]>(`${environment.API_URL}/users`);
   }
 
-  addUser(data: string): Observable<IUser> {
+  addUser(data: IUser): Observable<IUser> {
     return this.http.post<IUser>(`${environment.API_URL}/users`, data);
   }
 

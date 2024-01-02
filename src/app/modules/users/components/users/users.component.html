@@ -29,3 +29,8 @@
     </tr>
 </table>
 <mat-paginator showFirstLastButtons [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+<div class="example-button-container" [align]="'end'" (click)="openDialog()">
+    <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+      <mat-icon>add</mat-icon>
+    </button>
+</div>

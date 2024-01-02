@@ -6,6 +6,8 @@ import { MatTableDataSource, MatTableDataSourcePaginator } from '@angular/materi
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MatDialog } from '@angular/material/dialog';
+import { UserComponent } from '../user/user.component';
 
 @Component({
   selector: 'app-users',
@@ -23,7 +25,8 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   constructor(
     private usersService: UsersService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    public dialog: MatDialog
   ) {
   }
 
@@ -37,7 +40,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator as MatTableDataSourcePaginator;
     this.dataSource.sort = this.sort as MatSort;
     this.dataSource.filterPredicate = function (record, filter) {
-      return `${record.FirstName.toLowerCase()}${record.LastName.toLowerCase()}`.indexOf(filter) != -1;
+      return `${record.FirstName?.toLowerCase()}${record.LastName?.toLowerCase()}`.indexOf(filter) != -1;
    }
   }
 
@@ -60,5 +63,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  openDialog(): void {
+    let isAdding = true;
+    const dialogRef = this.dialog.open(UserComponent, {
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (isAdding)
+        this.dataSource.data.push(res);
+    });
   }
 }

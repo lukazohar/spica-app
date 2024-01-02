@@ -1,1 +1,19 @@
-<p>user works!</p>
+<h1 mat-dialog-title>Add User</h1>
+<div mat-dialog-content>
+  <p>First Name</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="user.FirstName">
+  </mat-form-field>
+  <p>Last Name</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="user.LastName">
+  </mat-form-field>
+  <p>Email</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="user.Email">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-flat-button color="primary" color="primary" cdkFocusInitial (click)="addUser(user)">Ok</button>
+</div>
