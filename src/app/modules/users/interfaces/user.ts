@@ -1,2 +1,35 @@
-export interface User {
+export interface IUser {
+    id: string;
+    firstName: string
+    lastName: string
+    middleName: string
+    fullName: string
+    birthDate: Date
+    address: string
+    city: string
+    state: string
+    phone: string
+    mobile: string
+    email: string
+    gender: string
+    pictureUri: string
+    customId: string
+    customField1: string
+    customField2: string
+    customField3: string
+    customField4: string
+    customField5: string
+    customField6: string
+    customField7: string
+    customField8: string
+    customField9: string
+    customField10: string
+    isTimeAttendanceUser: boolean
+    isArchived: boolean
+    hasUserAccount: boolean
+    userAccountId: string
+    userName: string
+    calculationStartDate: Date
+    calculationStopDate: Date
+    hasAssignedPin: boolean
 }
