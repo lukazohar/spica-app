@@ -7,10 +7,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
-    UsersComponent
+    UsersComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
