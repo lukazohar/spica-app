@@ -12,6 +12,7 @@ import { UserComponent } from './components/user/user.component';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     FormsModule
   ]
 })

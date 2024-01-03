@@ -1,79 +1,46 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { UsersService } from '../../services/users.service';
-import { Observable, of, tap } from 'rxjs';
-import { IUser } from '../../interfaces/user';
-import { MatTableDataSource, MatTableDataSourcePaginator } from '@angular/material/table';
+import { MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatDialog } from '@angular/material/dialog';
-import { UserComponent } from '../user/user.component';
+import { MatSort } from '@angular/material/sort';
+import { UsersDataSource } from './users-datasource';
+import { UsersService } from '../../services/users.service';
+import { IUser } from '../../interfaces/user';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit, AfterViewInit {
-  $users: Observable<IUser[]> = of();
-  displayedColumns: string[] = ['FirstName', 'LastName', 'Email'];
-  
-  dataSource = new MatTableDataSource<IUser>();
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  @ViewChild(MatSort) sort: MatSort | undefined;
+export class UsersComponent implements AfterViewInit, OnInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatTable) table!: MatTable<IUser>;
+  dataSource: UsersDataSource = new UsersDataSource();
 
+  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  displayedColumns = ['FirstName', 'LastName', 'Email'];
+  isLoading = false;
 
   constructor(
-    private usersService: UsersService,
-    private _liveAnnouncer: LiveAnnouncer,
-    public dialog: MatDialog
-  ) {
-  }
+    private usersService: UsersService
+  ) {}
 
   ngOnInit() {
-    this.getUsers().pipe(
-      tap(res => this.dataSource.data = res)
-    ).subscribe();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator as MatTableDataSourcePaginator;
-    this.dataSource.sort = this.sort as MatSort;
-    this.dataSource.filterPredicate = function (record, filter) {
-      return `${record.FirstName?.toLowerCase()}${record.LastName?.toLowerCase()}`.indexOf(filter) != -1;
-   }
-  }
-
-  getUsers(): Observable<IUser[]> {
-    return this.usersService.getUsers();
-  }
-
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  openDialog(): void {
-    let isAdding = true;
-    const dialogRef = this.dialog.open(UserComponent, {
-      data: {},
-    });
-
-    dialogRef.afterClosed().subscribe(res => {
-      if (isAdding)
-        this.dataSource.data.push(res);
+  ngAfterViewInit(): void {
+    this.isLoading = true;
+    this.usersService.getUsers().pipe(
+      tap(users => {
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.loadUsers(users);
+        this.table.dataSource = this.dataSource;
+      })
+    ).subscribe({
+      complete: () => this.isLoading = false,
+      error: (err) => this.isLoading = false
     });
   }
 }

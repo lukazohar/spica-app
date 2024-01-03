@@ -22,8 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {    
     return next.handle(this.addAuthToken(request)).pipe(
       catchError((requestError: HttpErrorResponse) => {
-      console.log("TEST 1");
-      if (requestError && requestError.status === 401) {
+        if (requestError && requestError.status === 401) {
           if (this.refreshTokenInProgress) {
             return this.refreshTokenSubject.pipe(
               filter((result) => result? true: false),
