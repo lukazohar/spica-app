@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, forkJoin, mergeMap } from 'rxjs';
-import { IAbsence } from '../interfaces/absence';
+import { IAbsence } from '../models/absence';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 

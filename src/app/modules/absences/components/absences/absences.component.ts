@@ -3,8 +3,8 @@ import { MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AbsencesDataSource } from './absences-datasource';
-import { AbsencesService } from '../../services/absences.service';
-import { IAbsence } from '../../interfaces/absence';
+import { AbsencesService } from '../../../../services/absences.service';
+import { IAbsence } from '../../../../models/absence';
 import { tap } from 'rxjs';
 
 @Component({
