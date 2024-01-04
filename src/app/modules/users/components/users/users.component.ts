@@ -8,6 +8,8 @@ import { IUser } from '../../../../models/user';
 import { tap } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UserComponent } from '../user/user.component';
+import { AbsencesService } from 'src/app/services/absences.service';
+import { AbsenceComponent } from 'src/app/modules/absences/components/absence/absence.component';
 
 @Component({
   selector: 'app-users',
@@ -21,12 +23,15 @@ export class UsersComponent implements AfterViewInit, OnInit {
   dataSource: UsersDataSource = new UsersDataSource();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['FirstName', 'LastName', 'Email'];
+  displayedColumns = ['FirstName', 'LastName', 'Email', 'Id'];
   isLoading = false;
 
   constructor(
     private usersService: UsersService,
-    public userDialog: MatDialog  ) {}
+    public userDialog: MatDialog,
+    public absenceDialog: MatDialog,
+    private absencesService: AbsencesService
+  ) {}
 
   ngOnInit() {
   }
@@ -47,6 +52,11 @@ export class UsersComponent implements AfterViewInit, OnInit {
   }
   addUser(): void {
     const dialogRef = this.userDialog.open(UserComponent);
+    dialogRef.afterClosed().subscribe();
+  }
+
+  addAbsence(userId: string): void {
+    const dialogRef = this.absenceDialog.open(AbsenceComponent, { data: { userId }});
     dialogRef.afterClosed().subscribe();
   }
 }

@@ -4,8 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AbsencesDataSource } from './absences-datasource';
 import { AbsencesService } from '../../../../services/absences.service';
-import { IAbsence } from '../../../../models/absence';
 import { tap } from 'rxjs';
+import { IAbsence } from 'src/app/models/absence';
 
 @Component({
   selector: 'app-absences',

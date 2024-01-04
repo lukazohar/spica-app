@@ -15,10 +15,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AbsencesRoutingModule } from './absences-routing.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AbsenceComponent } from './components/absence/absence.component';
 
 @NgModule({
   declarations: [
-    AbsencesComponent
+    AbsencesComponent,
+    AbsenceComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCheckboxModule
   ]
 })
 export class AbsencesModule { }

@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { IAbsence } from '../../../../models/absence';
+import { IAbsence } from 'src/app/models/absence';
 
 export class AbsencesDataSource extends DataSource<IAbsence> {
   data: IAbsence[] = [];
