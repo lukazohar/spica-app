@@ -6,6 +6,8 @@ import { UsersDataSource } from './users-datasource';
 import { UsersService } from '../../services/users.service';
 import { IUser } from '../../interfaces/user';
 import { tap } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UserComponent } from '../user/user.component';
 
 @Component({
   selector: 'app-users',
@@ -23,8 +25,8 @@ export class UsersComponent implements AfterViewInit, OnInit {
   isLoading = false;
 
   constructor(
-    private usersService: UsersService
-  ) {}
+    private usersService: UsersService,
+    public userDialog: MatDialog  ) {}
 
   ngOnInit() {
   }
@@ -42,5 +44,9 @@ export class UsersComponent implements AfterViewInit, OnInit {
       complete: () => this.isLoading = false,
       error: (err) => this.isLoading = false
     });
+  }
+  addUser(): void {
+    const dialogRef = this.userDialog.open(UserComponent);
+    dialogRef.afterClosed().subscribe();
   }
 }

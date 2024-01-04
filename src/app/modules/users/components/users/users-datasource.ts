@@ -1,40 +1,9 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { catchError, finalize, map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge, of, BehaviorSubject } from 'rxjs';
-import { UsersService } from '../../services/users.service';
+import { map } from 'rxjs/operators';
+import { Observable, of as observableOf, merge } from 'rxjs';
 import { IUser } from '../../interfaces/user';
-
-// TODO: Replace this with your own data model type
-/* export interface UsersItem {
-  name: string;
-  id: number;
-} */
-
-// TODO: replace this with real data from your application
-/* const EXAMPLE_DATA: UsersItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
-]; */
 
 /**
  * Data source for the Users view. This class should
@@ -70,7 +39,7 @@ export class UsersDataSource extends DataSource<IUser> {
 
   loadUsers(data: IUser[], filter = '', sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
     this.data = data;
-}
+  }
 
   /**
    *  Called when the table is being destroyed. Use this function, to clean up
