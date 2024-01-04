@@ -20,6 +20,5 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get("https://api4.allhours.com/api/v1/Users").subscribe();
   }
 }

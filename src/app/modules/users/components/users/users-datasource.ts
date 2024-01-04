@@ -69,8 +69,6 @@ export class UsersDataSource extends DataSource<IUser> {
   }
 
   loadUsers(data: IUser[], filter = '', sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
-    console.log(data);
-    
     this.data = data;
 }
 
