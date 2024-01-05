@@ -50,6 +50,20 @@ export class UsersComponent implements AfterViewInit, OnInit {
       error: (err) => this.isLoading = false
     });
   }
+
+  filterFirstName: string = "";
+  filterByFirstName() {
+    console.log(this.filterFirstName);
+    this.dataSource.loadUsers([]);
+    this.dataSource.connect();
+  }
+
+  filterLastName: string = "";
+  filterByLastName() {
+    console.log(this.filterLastName);
+    this.dataSource.loadUsers([]);
+  }
+
   addUser(): void {
     const dialogRef = this.userDialog.open(UserComponent);
     dialogRef.afterClosed().subscribe();
