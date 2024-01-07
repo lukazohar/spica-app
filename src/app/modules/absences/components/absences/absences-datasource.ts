@@ -26,8 +26,6 @@ export class AbsencesDataSource extends DataSource<IAbsence> {
   }
 
   loadAbsences(data: IAbsence[], filter = '', sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
-    console.log(data);
-    
     this.data = data;
 }
   disconnect(): void {

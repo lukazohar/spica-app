@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, filter, finalize, map, of, switchMap, take, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, filter, finalize, switchMap, take, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Token } from '../models/token';
 
@@ -35,9 +35,8 @@ export class TokenInterceptor implements HttpInterceptor {
 
             return this.authService.refreshToken().pipe(
               switchMap((token) => {
-                console.log("TEST 2");
                 this.refreshTokenSubject.next(token);
-                this.authService.setToken(token); // TODO: check this
+                this.authService.setToken(token);
                 return next.handle(this.addAuthToken(request));
               }),
               finalize(() => (this.refreshTokenInProgress = false))
@@ -48,23 +47,6 @@ export class TokenInterceptor implements HttpInterceptor {
         }
       })
     );
-    /* return of(this.authService.isTokenValid()).pipe(
-      switchMap(isTokenValid => {
-        if (isTokenValid)
-          return of(this.authService.getToken());
-        return this.authService.refreshToken();
-      }),
-      switchMap(token => {
-        console.log(token);
-        
-        const modifiedRequest = request.clone({
-          setHeaders: {
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        });
-        return next.handle(modifiedRequest);
-      })
-    ); */
   }
 
   addAuthToken(request: HttpRequest<any>) {
