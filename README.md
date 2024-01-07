@@ -1,20 +1,11 @@
 # Start development server
-
-1. Copy `.env` and `.env.local` files to root folder of the project (next to package.json),
-2. Start development server with `npm start`
+1. Clone git repository with command `git clone https://github.com/lukazohar/spica-app.git`.
+2. Copy `.env` and `.env.local` files (they're in e-mail) to the root folder of the project (next to package.json),.
+3. Start development server with `npm start`.
+4. Acces website at `localhost:4200` in your development browser.
 
 # Build server
-
 Run `npm build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-# Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-# Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
 ## Further help
-
-If you have and questions about this mini project, contact me on e-mail `luka.zohi@gmail.com` or on social media `Luka Žohar`.
+If you have and questions about this project, contact me on e-mail `luka.zohi@gmail.com`, on phone number `+386 40 416 417` or on social media `Luka Žohar`.
