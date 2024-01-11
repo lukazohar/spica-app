@@ -22,7 +22,6 @@ export class UsersComponent implements AfterViewInit, OnInit {
   @ViewChild(MatTable) table!: MatTable<IUser>;
   dataSource: UsersDataSource = new UsersDataSource();
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['FirstName', 'LastName', 'Email', 'Id'];
   isLoading = false;
 

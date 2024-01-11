@@ -1,5 +1,4 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { Observable, map, shareReplay } from 'rxjs';
 
@@ -17,7 +16,7 @@ export class AppComponent implements OnInit {
       shareReplay()
     );
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   ngOnInit() {
   }
