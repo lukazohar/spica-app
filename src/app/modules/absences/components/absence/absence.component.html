@@ -23,7 +23,7 @@
   <p>Partial Time From</p>
   <mat-form-field>
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="pickerPartialTimeFrom" [value]="absence.PartialTimeFrom">
+    <input matInput [matDatepicker]="pickerPartialTimeFrom" [(ngModel)]="absence.PartialTimeFrom">
     <mat-datepicker-toggle matIconSuffix [for]="pickerPartialTimeFrom"></mat-datepicker-toggle>
     <mat-datepicker #pickerPartialTimeFrom></mat-datepicker>
   </mat-form-field>
@@ -31,7 +31,7 @@
   <p>Partial Time To</p>
   <mat-form-field>
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="pickerPartialTimeTo" [value]="absence.PartialTimeTo">
+    <input matInput [matDatepicker]="pickerPartialTimeTo" [(ngModel)]="absence.PartialTimeTo">
     <mat-datepicker-toggle matIconSuffix [for]="pickerPartialTimeTo"></mat-datepicker-toggle>
     <mat-datepicker #pickerPartialTimeTo></mat-datepicker>
   </mat-form-field>

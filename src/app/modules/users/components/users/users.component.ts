@@ -5,11 +5,12 @@ import { MatSort } from '@angular/material/sort';
 import { UsersDataSource } from './users-datasource';
 import { UsersService } from '../../../../services/users.service';
 import { IUser } from '../../../../models/user';
-import { tap } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UserComponent } from '../user/user.component';
 import { AbsencesService } from 'src/app/services/absences.service';
 import { AbsenceComponent } from 'src/app/modules/absences/components/absence/absence.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-users',
@@ -36,8 +37,17 @@ export class UsersComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
+    this.filter();
+  }
+
+  filterFirstName: string = "";
+  filterLastName: string = "";
+
+  filter() {
     this.isLoading = true;
+    this.dataSource = new UsersDataSource();
     this.usersService.getUsers().pipe(
+      map(res => res.filter(x => x.FirstName?.includes(this.filterFirstName) && x.LastName?.includes(this.filterLastName))),
       tap(users => {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -48,19 +58,6 @@ export class UsersComponent implements AfterViewInit, OnInit {
       complete: () => this.isLoading = false,
       error: (err) => this.isLoading = false
     });
-  }
-
-  filterFirstName: string = "";
-  filterByFirstName() {
-    console.log(this.filterFirstName);
-    this.dataSource.loadUsers([]);
-    this.dataSource.connect();
-  }
-
-  filterLastName: string = "";
-  filterByLastName() {
-    console.log(this.filterLastName);
-    this.dataSource.loadUsers([]);
   }
 
   addUser(): void {

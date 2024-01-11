@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { AbsencesModule } from './modules/absences/absences.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AbsencesModule } from './modules/absences/absences.module';
     MatPaginatorModule,
     MatSortModule,
     MatSidenavModule,
-    AbsencesModule
+    AbsencesModule,
+    MatSnackBarModule
   ],
   providers: [
     {

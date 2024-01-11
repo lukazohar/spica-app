@@ -25,14 +25,13 @@ export class AbsencesService {
 
   getAbsencesByDate(dateFrom: Date, dateTo: Date): Observable<IAbsence[]> {
     const params = {
-      params: new HttpParams().set('dateFrom ', dateFrom.toString()).set('dateTo ', dateTo.toString())
+      params: new HttpParams().set('dateFrom', dateFrom.toISOString()).set('dateTo', dateTo.toISOString())
     };
-    return this.http.get<IAbsence[]>(`${environment.API_URL}/absences/Obfuscated`, params).pipe(
-      mergeMap(absences => forkJoin(absences.map(x => this.getAbsence(x.Id))))
-    );
+    return this.http.get<IAbsence[]>(`${environment.API_URL}/Absences`, params).pipe();
   }
 
   addAbsence(absence: IAbsenceCreate): Observable<IAbsence> {
+    console.log("🚀 ~ AbsencesService ~ addAbsence ~ absence:", absence)
     return this.http.post<IAbsence>(`${environment.API_URL}/Absences`, absence);
   }
 

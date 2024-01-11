@@ -21,11 +21,13 @@ export class AbsencesComponent implements AfterViewInit, OnInit {
   displayedColumns = ['FirstName', 'LastName', 'Comment'];
   isLoading = false;
 
-  date = new Date();
+  date: Date = new Date();
 
   constructor(
     private absencesService: AbsencesService
-  ) {}
+  ) {
+    this.date.setHours(0, 0, 0, 0)
+  }
 
   ngOnInit() {
   }
@@ -36,6 +38,7 @@ export class AbsencesComponent implements AfterViewInit, OnInit {
 
   refreshAbsences(date: Date) {
     this.isLoading = true;
+    this.dataSource = new AbsencesDataSource();
     this.absencesService.getAbsencesByDate(date, new Date(new Date(date).setDate(date.getDate() + 1))).pipe(
       tap(absences => {
         this.dataSource.sort = this.sort;
